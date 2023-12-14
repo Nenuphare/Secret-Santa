@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
 // mongoDB database link
-mongoose.connect('mongodb://localhost:27017/apif1light');
+mongoose.connect('mongodb://localhost:27017/apisecretsanta');
 
 app.use(express.urlencoded());
 app.use(express.json());
