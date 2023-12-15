@@ -14,11 +14,6 @@ const membershipSchema = new Schema({
         ref: 'User',
         required: true
     },
-    id_admin: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
     invite: {
         type: Boolean
     }
