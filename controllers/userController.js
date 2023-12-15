@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 
+// user CRUD + password Hash
 exports.userRegister = async (req, res) => {
     try {
         let newUser = new User(req.body);
@@ -67,7 +68,7 @@ exports.userDelete = async (req, res) => {
     } catch (error) {
         res.status(500);
         console.log(error);
-        res.json({message: 'Erreur serveur while deleting user'});
+        res.json({message: 'Server error while deleting user'});
     }
     
 };
