@@ -17,11 +17,6 @@ const userSchema = new Schema({
     password: { 
         type: String,
         required: true 
-    },
-    id_group: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Group',
-        required: true
     }
 });
 

@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Group model creation
+// Assignment model creation
 const assignmentSchema = new Schema({
     id_giver: {
         type: mongoose.Schema.Types.ObjectId,
