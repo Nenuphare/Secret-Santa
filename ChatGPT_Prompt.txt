@@ -34,3 +34,6 @@ The API should enable users to register, create groups, and secretly assign peop
 - 📄 API documentation / Postman Collection
 
 Résultat: pas utile.
+
+Second prompt:
+Comment the following code: *the code i need it ton comment*

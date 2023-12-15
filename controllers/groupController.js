@@ -1,37 +1,43 @@
+// Importing the Group and User models
 const Group = require('../models/groupModel');
 const User = require('../models/userModel');
 
-//Group CRUD
+// Get information about a group
 exports.getGroup = async (req, res) => {
     try {
+        // Extract user and group IDs from request parameters
         const userId = req.params.id_user;
-        const groupId = req.params.id_user;
+        const groupId = req.params.id_group;
 
+        // Check if the user exists
         const user = await User.findById(userId);
-
         if (!user) {
             return res.status(404).json({ message: 'User not found.' });
         }
-        const group = await Group.findById(groupId);
 
+        // Check if the group exists
+        const group = await Group.findById(groupId);
         if (!group) {
             return res.status(404).json({ message: 'Group not found' });
         }
 
-        // Vérifie si l'utilisateur a le rôle "admin" dans le groupe spécifié verify
+        // Verify if the user has the role "admin" in the specified group
         if (userId != req.body.admin) {
             return res.status(403).json({ message: 'Access denied, you are not authorized' });
         }
 
-        // Si l'utilisateur est admin dans le groupe, renvoyer les informations du groupe
+        // If the user is an admin in the group, send the group information
         res.status(200).json(group);
     } catch (error) {
-        res.status(500).json({ message: 'Erreur serveur.' });
+        // Handle server error
+        res.status(500).json({ message: 'Server error.' });
     }
 }
 
+// Create a new group
 exports.createGroup = async (req, res) => {
     try {
+        // Extract user ID from request parameters
         const userId = req.params.id_user;
 
         // Check if the user exists
@@ -54,15 +60,19 @@ exports.createGroup = async (req, res) => {
 
         const group = await newGroup.save();
 
+        // Send success response
         res.status(201).json({ message: 'Group created' });
     } catch (error) {
+        // Handle server error and log details
         console.error(error);
-        res.status(500).json({ message: 'server error' });
+        res.status(500).json({ message: 'Server error' });
     }
 }
 
+// Delete a group
 exports.deleteGroup = async (req, res) => {
     try {
+        // Extract user and group IDs from request parameters
         const userId = req.params.id_user;
         const groupId = req.params.id_group;
 
@@ -86,15 +96,19 @@ exports.deleteGroup = async (req, res) => {
         // Delete the group
         await group.remove();
 
+        // Send success response
         res.status(200).json({ message: 'Group deleted' });
     } catch (error) {
+        // Handle server error and log details
         console.error(error);
         res.status(500).json({ message: 'Server error' });
     }
 }
 
+// Update a group
 exports.updateGroup = async (req, res) => {
     try {
+        // Extract user and group IDs from request parameters
         const userId = req.params.id_user;
         const groupId = req.params.id_group;
 
@@ -119,10 +133,11 @@ exports.updateGroup = async (req, res) => {
         Object.assign(group, req.body);
         await group.save();
 
+        // Send success response
         res.status(200).json({ message: 'Group updated' });
     } catch (error) {
+        // Handle server error and log details
         console.error(error);
         res.status(500).json({ message: 'Server error' });
     }
 }
-
